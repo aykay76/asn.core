@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 
 namespace asn.core
 {
-    public class AsnPublicKeyPair : AsnBase
+    public class AsnPublicKeyPair : AsnSequence
     {
         public AsnInteger modulus;
         public AsnInteger exponent;

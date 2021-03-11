@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace asn.core
 {
-    public class AsnExtensions : AsnBase
+    public class AsnExtensions : AsnSequence
     {
         public List<AsnExtension> extensions;
 

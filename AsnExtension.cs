@@ -2,7 +2,7 @@
 
 namespace asn.core
 {
-    public class AsnExtension : AsnBase
+    public class AsnExtension : AsnSequence
     {
         public AsnOid extnID;
         public AsnBoolean critical;

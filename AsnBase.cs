@@ -13,6 +13,12 @@ namespace asn.core
         public byte[] originalDer;
         public byte[] derValue;
 
+        protected List<AsnBase> elements;
+
+        public AsnBase()
+        {
+        }
+
         protected void CheckContextTag(byte[] source, ref int pos)
         {
             if ((source[pos] & 0xc0) == 0x80)

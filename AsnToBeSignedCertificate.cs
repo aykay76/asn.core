@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 
 namespace asn.core
 {
-    public class AsnToBeSignedCertificate : AsnBase
+    public class AsnToBeSignedCertificate : AsnSequence
     {
         // ASN.1
         //  ToBeSignedCertificate           SEQUENCE

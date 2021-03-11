@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace asn.core
 {
-    public class AsnPrivateKeyPair : AsnBase
+    public class AsnPrivateKeyPair : AsnSequence
     {
         public AsnInteger version;
         public AsnInteger modulus;

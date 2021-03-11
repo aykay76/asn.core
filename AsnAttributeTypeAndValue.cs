@@ -2,15 +2,16 @@
 
 namespace asn.core
 {
-    public class AsnAttributeTypeAndValue : AsnBase
+    public class AsnAttributeTypeAndValue : AsnSequence
     {
         //  AttributeTypeAndValue ::= SEQUENCE {
         //      type AsnOid.cs,
         //      value    AsnString.cs
         //  }
 
-        public AsnOid type;
-        public AsnString value;
+        // TODO: add these back in as refs if needed, otherwise just use the elements list
+        // public AsnOid type;
+        // public AsnString value;
 
         public AsnAttributeTypeAndValue()
         {
@@ -19,56 +20,27 @@ namespace asn.core
 
         public AsnAttributeTypeAndValue(AsnOid oid, AsnString newValue)
         {
-            type = oid;
-            value = newValue;
+            elements.Add(oid);
+            elements.Add(newValue);
         }
 
         public AsnAttributeTypeAndValue(string oid, string newValue, AsnType.UniversalTag tag)
         {
-            type = new AsnOid(oid);
-            value = new AsnString(newValue, tag);
-        }
-
-        public override int Encode()
-        {
-            int l = 0;
-
-            l += type.Encode();
-            l += value.Encode();
-
-            // TODO: encode self as sequence - constructed
-            byte[] lengthBytes = EncodeLength(l);
-
-            derValue = new byte[3 + lengthBytes.Length + l];
-            derValue[0] = 0x31;
-            derValue[1] = (byte)(l + 2);
-            derValue[2] = 0x30;
-            Array.Copy(lengthBytes, 0, derValue, 3, lengthBytes.Length);
-            Array.Copy(type.derValue, 0, derValue, 3 + lengthBytes.Length, type.derValue.Length);
-            Array.Copy(value.derValue, 0, derValue, 3 + lengthBytes.Length + type.derValue.Length, value.derValue.Length);
-
-            PrependContextTag();
-
-            return derValue.Length;
+            elements.Add(new AsnOid(oid));
+            elements.Add(new AsnString(newValue, tag));
         }
 
         public static AsnAttributeTypeAndValue Decode(byte[] source, ref int pos)
         {
             AsnAttributeTypeAndValue instance = new AsnAttributeTypeAndValue();
-           
-            // skip the 0x31
-            pos++;
 
-            // sequence tag
-            long setLength = instance.GetLength(source, ref pos);
-
-            // skip the 0x30
-            pos++;
+            // skip the 0x30 (SEQUENCE)
+            pos++;           
 
             long length = instance.GetLength(source, ref pos);
 
-            instance.type = AsnOid.Decode(source, ref pos);
-            instance.value = AsnString.Decode(source, ref pos);
+            instance.elements.Add(AsnOid.Decode(source, ref pos));
+            instance.elements.Add(AsnString.Decode(source, ref pos));
 
             return instance;
         }

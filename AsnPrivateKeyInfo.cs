@@ -2,7 +2,7 @@
 
 namespace asn.core
 {
-    public class AsnPrivateKeyInfo : AsnBase
+    public class AsnPrivateKeyInfo : AsnSequence
     {
         // PKCS #1 format private key
         //      subjectPKInfo               SEQUENCE

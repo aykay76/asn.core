@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace asn.core
 {
-    public class AsnName : AsnBase
+    public class AsnName : AsnSequence
     {
         //  Name                    SEQUENCE
         //      RDN                     SET <List>
@@ -11,52 +11,27 @@ namespace asn.core
         //              Type            AsnOid.cs
         //              Value           AsnString.cs 
 
-        public List<AsnAttributeTypeAndValue> set;
-
-        public AsnName()
+        public AsnName() : base()
         {
-            set = new List<AsnAttributeTypeAndValue>();
         }
 
-        public AsnName(string DN)
-        {
-            set = new List<AsnAttributeTypeAndValue>();
+        // public AsnName(string DN)
+        // {
+        //     elements.Add(new AsnRelativeDistinguishedName());
 
-            string[] parts = DN.Split(',', StringSplitOptions.None);
-            foreach (string part in parts)
-            {
-                string[] sections = part.Split('=', StringSplitOptions.None);
-                AsnAttributeTypeAndValue rdn = new AsnAttributeTypeAndValue(AsnOid.FromFriendlyName(sections[0]), new AsnString(sections[1], AsnType.UniversalTag.PrintableString));
-                set.Add(rdn);
-            }
-        }
+        //     string[] parts = DN.Split(',', StringSplitOptions.None);
+        //     foreach (string part in parts)
+        //     {
+        //         string[] sections = part.Split('=', StringSplitOptions.None);
+        //         AsnAttributeTypeAndValue rdn = new AsnAttributeTypeAndValue(AsnOid.FromFriendlyName(sections[0]), new AsnString(sections[1], AsnType.UniversalTag.PrintableString));
+        //         set.Add(rdn);
+        //         RDN.
+        //     }
+        // }
 
         public override int Encode()
         {
-            int setLength = 0;
-            foreach (AsnAttributeTypeAndValue tv in set)
-            {
-                setLength += tv.Encode();
-            }
-            byte[] setLengthBytes = EncodeLength(setLength);
-            byte[] setBytes = new byte[setLength];
-
-            int pos = 0;
-
-            Array.Copy(setLengthBytes, 0, setBytes, pos, setLengthBytes.Length);
-            foreach (AsnAttributeTypeAndValue tv in set)
-            {
-                Array.Copy(tv.derValue, 0, setBytes, pos, tv.derValue.Length);
-                pos += tv.derValue.Length;
-            }
-
-            int sequenceLength = setBytes.Length;
-            byte[] sequenceLengthBytes = EncodeLength(sequenceLength);
-
-            derValue = new byte[1 + sequenceLengthBytes.Length + setBytes.Length];
-            derValue[0] = 0x30; // constructed sequence
-            Array.Copy(sequenceLengthBytes, 0, derValue, 1, sequenceLengthBytes.Length);
-            Array.Copy(setBytes, 0, derValue, 1 + sequenceLengthBytes.Length, setBytes.Length);
+            base.Encode();
 
             PrependContextTag();
 
@@ -68,9 +43,9 @@ namespace asn.core
             AsnName instance = new AsnName();
 
             //CheckContextTag(source, ref pos);
-            pos++;
 
-            instance.set = new List<AsnAttributeTypeAndValue>();
+            // skip the 0x30 (SEQUENCE)
+            pos++;
 
             // sequence length
             long length = instance.GetLength(source, ref pos);
@@ -81,9 +56,8 @@ namespace asn.core
             // decode the set
             while (pos < start + length)
             {
-                // each entry in the set is comprised of an attribute type and value pair
-                AsnAttributeTypeAndValue tv = AsnAttributeTypeAndValue.Decode(source, ref pos);
-                instance.set.Add(tv);
+                AsnRelativeDistinguishedName name = AsnRelativeDistinguishedName.Decode(source, ref pos);
+                instance.elements.Add(name);
             }
 
             return instance;

@@ -2,7 +2,7 @@
 
 namespace asn.core
 {
-    public class AsnValidity : AsnBase
+    public class AsnValidity : AsnSequence
     {
         public AsnGeneralizedTime notBefore;
         public AsnGeneralizedTime notAfter;
