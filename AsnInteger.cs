@@ -17,7 +17,7 @@ namespace asn.core
             myValue = new BigInteger(newValue);
         }
 
-        public int Encode()
+        public override int Encode()
         {            
             byte[] valueBytes = null;
 

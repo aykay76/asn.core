@@ -29,7 +29,7 @@ namespace asn.core
             value = new AsnString(newValue, tag);
         }
 
-        public int Encode()
+        public override int Encode()
         {
             int l = 0;
 

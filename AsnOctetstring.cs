@@ -16,7 +16,7 @@ namespace asn.core
             value = newValue;
         }
 
-        public int Encode()
+        public override int Encode()
         {
             byte[] lengthBytes = EncodeLength(value.Length);
             derValue = new byte[1 + lengthBytes.Length + value.Length];

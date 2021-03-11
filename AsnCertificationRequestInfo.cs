@@ -21,7 +21,7 @@ namespace asn.core
             subjectPKInfo = new AsnPublicKeyInfo();
         }
 
-        public int Encode()
+        public override int Encode()
         {
             int len = 0;
 

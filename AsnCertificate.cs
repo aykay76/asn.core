@@ -19,7 +19,7 @@ namespace asn.core
             signature = new AsnBitstring();
         }
 
-        public int Encode()
+        public override int Encode()
         {
             int length = 0;
 

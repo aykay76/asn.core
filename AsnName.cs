@@ -31,7 +31,7 @@ namespace asn.core
             }
         }
 
-        public int Encode()
+        public override int Encode()
         {
             int setLength = 0;
             foreach (AsnAttributeTypeAndValue tv in set)

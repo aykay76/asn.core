@@ -59,7 +59,7 @@ namespace asn.core
             return tbsCert;
         }
 
-        public int Encode()
+        public override int Encode()
         {
             int length = 0;
             int extensionsLength = 0;

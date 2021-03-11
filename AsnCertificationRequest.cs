@@ -22,7 +22,7 @@ namespace asn.core
             signatureAlgorithm = new AsnAlgorithmIdentifier();
         }
 
-        public int Encode()
+        public override int Encode()
         {
             int len = 0;
 

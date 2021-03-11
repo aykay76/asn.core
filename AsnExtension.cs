@@ -27,7 +27,7 @@ namespace asn.core
             extnValue = new AsnOctetstring(value);
         }
 
-        public int Encode()
+        public override int Encode()
         {
             int length = 0;
 

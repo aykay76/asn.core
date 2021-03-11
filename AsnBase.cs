@@ -78,6 +78,11 @@ namespace asn.core
             return lengthBytes;
         }
 
+        public virtual int Encode()
+        {
+            return 0;
+        }
+
         protected int GetLength(byte[] array, ref int index)
         {
             int length = 0;

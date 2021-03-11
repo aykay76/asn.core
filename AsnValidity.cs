@@ -7,7 +7,7 @@ namespace asn.core
         public AsnGeneralizedTime notBefore;
         public AsnGeneralizedTime notAfter;
 
-        public int Encode()
+        public override int Encode()
         {
             int length = 0;
 

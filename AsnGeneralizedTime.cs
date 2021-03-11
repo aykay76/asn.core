@@ -17,7 +17,7 @@ namespace asn.core
 			value = newValue;
 		}
 		
-        public int Encode()
+        public override int Encode()
         {
             string text = value.ToString("yyyyMMddHHmmssZ");
 

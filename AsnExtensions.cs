@@ -12,7 +12,7 @@ namespace asn.core
             extensions = new List<AsnExtension>();
         }
 
-        public int Encode()
+        public override int Encode()
         {
             int length = 0;
 

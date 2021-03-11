@@ -18,7 +18,7 @@ namespace asn.core
             tag = newTag;
         }
 
-        public int Encode()
+        public override int Encode()
         {
             byte[] lengthBytes = EncodeLength(value.Length);
             byte[] valueBytes = System.Text.Encoding.UTF8.GetBytes(value);

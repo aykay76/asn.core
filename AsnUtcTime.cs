@@ -7,7 +7,7 @@ namespace asn.core
     {
         public DateTime value;
 
-        public int Encode()
+        public override int Encode()
         {
             string text = value.ToString("yyMMddHHmmssZ");
 

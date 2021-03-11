@@ -29,7 +29,7 @@ namespace asn.core
             return kp;
         }
 
-        public int Encode()
+        public override int Encode()
         {
             int len = 0;
 

@@ -17,7 +17,7 @@ namespace asn.core
             parameters = new AsnNull();
         }
 
-        public int Encode()
+        public override int Encode()
         {
             int len = 0;
 

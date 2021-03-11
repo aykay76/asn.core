@@ -2,7 +2,7 @@
 {
     public class AsnNull : AsnBase
     {
-        public int Encode()
+        public override int Encode()
         {
             derValue = new byte[2];
 

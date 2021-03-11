@@ -20,7 +20,7 @@ namespace asn.core
             keys = new AsnPublicKeyPair();
         }
 
-        public int Encode()
+        public override int Encode()
         {
             int len = 0;
 

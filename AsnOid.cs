@@ -49,7 +49,7 @@ namespace asn.core
             return val;
         }
 
-        public int Encode()
+        public override int Encode()
         {
             string[] parts = value.Value.Split(new char[] { '.' });
             List<byte> bytes = new List<byte>

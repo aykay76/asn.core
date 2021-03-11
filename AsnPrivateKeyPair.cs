@@ -48,7 +48,7 @@ namespace asn.core
 
         public AsnPrivateKeyPair() => new AsnPrivateKeyPair(2048);
 
-        public int Encode()
+        public override int Encode()
         {
             int len = 0;
 

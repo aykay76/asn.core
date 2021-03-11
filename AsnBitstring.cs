@@ -17,7 +17,7 @@ namespace asn.core
             value = newValue;
         }
 
-        public int Encode()
+        public override int Encode()
         {
             byte[] lengthBytes = EncodeLength(value.Length + 1); // add one byte for unused flag
 

@@ -309,7 +309,7 @@ namespace asn.core
                     int length = GetLength(test, ref bi);
                     byte[] raw = new byte[length];
                     Array.Copy(test, bi, raw, 0, length);
-                    string decoded = System.Text.Encoding.UTF7.GetString(raw);
+                    string decoded = System.Text.Encoding.UTF8.GetString(raw);
                     Console.WriteLine(decoded);
                     bi += (int)length;
                 }
